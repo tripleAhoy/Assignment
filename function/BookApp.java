@@ -3,9 +3,9 @@ public class BookApp {
 	public static int isNumberCopies(int copies) {
 		int price = 0;
 		int priceCopies = price * copies;
-		if(copies <= 4) {
+		if(copies >= 1 && copies <= 4) {
 			price = 2000;
-			priceCopies = 0;
+			priceCopies = price * copies;
 		}
 		else if (copies >= 5 && copies <= 9) {
 			price = 1800;
@@ -34,6 +34,9 @@ public class BookApp {
 		else if (copies >= 500) {
 			price = 1000;
 			priceCopies = price * copies;
+		}
+		else{
+			System.out.println("Invalid number of copies!");
 		}
 		return priceCopies;
 	}
