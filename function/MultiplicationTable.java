@@ -1,7 +1,7 @@
 public class MultiplicationTable {
 
 	public static int isMultiplication(int number1, int number2) {
-		System.out.println("\n Multiplication Table (" + number1 + " to " + number2 + ")\n");
+		System.out.println("\n Multiplication Table " + number1 + " to " + number2 + "\n");
 		System.out.print("  ");
 		for(int i = number1; i <= number2; i++) {
 			System.out.print(i + "\t");
