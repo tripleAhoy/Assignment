@@ -2,37 +2,48 @@ import java.util.Scanner;
 
 public class MenstrualApp {
 
-	public static int lengthCycle(int num1, int num2) {
-	
-		int cycleLength = num2 - num1;
-		if (cycleLength < 21) {
-			System.out.println("Abnormal cycle. Too short");
-		}else if(cycleLength > 35) {
-			System.out.println("Abnormal cycle. Too long");
-		}else {
-			System.out.println("normal cycle.");
-		}
-		return cycleLength;	
-	}
+    public static int nextPeriod(int startDay, int cycleLength) {
+        return startDay + cycleLength;
+    }
 
-	public static int fertilityWindow(int cycleLength) {
-		return cycleLength - 14;
+    public static int ovulationDay(int startDay, int cycleLength) {
+        return startDay + (cycleLength - 14);
+    }
 
-	}
 
-	
+    public static String fertileWindow(int ovulationDay) {
+        return (ovulationDay - 7) + " to " + (ovulationDay + 2);
+    }
 
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		System.out.print("Enter the date of your first cycle: ");
-		int firstDay = scanner.nextInt();
-		System.out.print("Enter next date of your first cycle: ");
-		int nextDay = scanner.nextInt();
-		
-		int cycleLength = lengthCycle(firstDay, nextDay);
-		int ovulationDay = fertilityWindow(cycleLength);
-		
-		System.out.println("Your cycle-length is " + cycleLength + " days.");
-		System.out.println("Your estimated ovulaton date is around day " + ovulationDay + " of your cycle");
-	}
+
+    public static String getSafeDays(int periodStart, int fertileEnd, int nextPeriod) {
+        return "Before ovulation: " + periodStart + "-" + (fertileEnd - 4) + "\n" +
+               "After ovulation: " + (fertileEnd + 1) + "-" + nextPeriod;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("\n\Menstrual Period App");
+        System.out.print("\nEnter last period start day (1-31): ");
+        int periodStart = scanner.nextInt();
+        
+        System.out.print("Enter average cycle length (21-35 days): ");
+        int cycleLength = scanner.nextInt();
+      
+        int nextPeriod = nextPeriod(periodStart, cycleLength);
+        int ovulationDay = ovulationDay(periodStart, cycleLength);
+        String fertileWindow = fertileWindow(ovulationDay);
+        String safeDays = getSafeDays(periodStart, ovulationDay + 2, nextPeriod);
+        
+
+        System.out.println("\n\tYour Cycle Info");
+        System.out.println("Next period: Day " + nextPeriod);
+        System.out.println("Ovulation day: Day " + ovulationDay);
+        System.out.println("Fertile window: Days " + fertileWindow);
+        System.out.println("Safe days:\n" + safeDays);
+        
+
+    }
 }
+
